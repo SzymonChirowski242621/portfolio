@@ -1,0 +1,43 @@
+---
+import { site } from "../data/site";
+
+const links = [
+  { label: "Email", value: site.email, href: `mailto:${site.email}` },
+  { label: "LinkedIn", value: "/in/szymon-chirowski", href: site.links.linkedin },
+  { label: "GitHub", value: "/SzymonChirowski242621", href: site.links.github },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="contact section" id="contact" aria-labelledby="contact-title">
+  <div class="shell">
+    <div class="contact__grid">
+      <div data-reveal>
+        <p class="eyebrow">Available now</p>
+        <p class="contact__big" id="contact-title">
+          Open to ML internships<br />&amp; part-time roles.
+        </p>
+        <p class="contact__note">
+          <strong>Email is the quickest way to reach me</strong> — I read every
+          message and usually reply within a day. Based in Breda, open to on-site,
+          hybrid or fully remote.
+        </p>
+      </div>
+      <nav class="contact__links" aria-label="Contact and social">
+        {links.map((l) => (
+          <a class="contact__link" href={l.href}
+            target={l.href.startsWith("http") ? "_blank" : undefined}
+            rel={l.href.startsWith("http") ? "noopener" : undefined}>
+            <span>{l.label}</span>
+            <span>{l.value} <span class="arrow" aria-hidden="true">↗</span></span>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="colophon">
+      <span>© {year} {site.name}</span>
+      <span>Built with Astro · Hosted on Cloudflare Pages</span>
+    </div>
+  </div>
+</footer>

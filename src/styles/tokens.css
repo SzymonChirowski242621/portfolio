@@ -1,0 +1,107 @@
+/* ============================================================
+   Design tokens — Szymon Chirowski portfolio
+   Violet accent · paper-warm light · charcoal dark
+   ============================================================ */
+
+:root {
+  /* ---- Type families ---- */
+  --font-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---- Fluid type scale (clamp: min / fluid / max) ---- */
+  --step--1: clamp(0.78rem, 0.74rem + 0.18vw, 0.88rem);
+  --step-0:  clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  --step-1:  clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2:  clamp(1.5rem, 1.3rem + 1vw, 2.1rem);
+  --step-3:  clamp(2rem, 1.6rem + 2vw, 3.2rem);
+  --step-4:  clamp(2.8rem, 2rem + 3.6vw, 5rem);
+  --step-5:  clamp(3.6rem, 2.2rem + 6.4vw, 8rem);
+
+  /* ---- Spacing scale ---- */
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* ---- Layout ---- */
+  --measure: 64ch;
+  --shell: 1240px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --radius: 14px;
+  --radius-s: 8px;
+  --border-w: 1px;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.5s;
+}
+
+/* ---------- LIGHT (default) ---------- */
+:root,
+:root[data-theme="light"] {
+  --bg: oklch(0.975 0.004 286);
+  --bg-2: oklch(0.945 0.006 286);
+  --surface: oklch(0.995 0.002 286);
+  --ink: oklch(0.21 0.018 286);
+  --ink-2: oklch(0.42 0.02 286);
+  --muted: oklch(0.56 0.018 286);
+  --line: oklch(0.88 0.008 286);
+  --line-strong: oklch(0.78 0.012 286);
+  --accent: oklch(0.56 0.205 287);
+  --accent-ink: oklch(0.99 0 0);
+  --accent-tint: oklch(0.94 0.04 287);
+  --accent-tint-2: oklch(0.9 0.06 287);
+  --shadow: 0 1px 2px oklch(0.21 0.02 286 / 0.05),
+            0 10px 30px -12px oklch(0.21 0.02 286 / 0.16);
+  --shadow-lift: 0 2px 4px oklch(0.21 0.02 286 / 0.06),
+                 0 24px 50px -18px oklch(0.21 0.02 286 / 0.26);
+  color-scheme: light;
+}
+
+/* ---------- DARK ---------- */
+:root[data-theme="dark"] {
+  --bg: oklch(0.18 0.012 286);
+  --bg-2: oklch(0.215 0.014 286);
+  --surface: oklch(0.235 0.014 286);
+  --ink: oklch(0.96 0.006 286);
+  --ink-2: oklch(0.78 0.012 286);
+  --muted: oklch(0.64 0.014 286);
+  --line: oklch(0.34 0.016 286);
+  --line-strong: oklch(0.44 0.02 286);
+  --accent: oklch(0.72 0.17 288);
+  --accent-ink: oklch(0.16 0.02 286);
+  --accent-tint: oklch(0.3 0.06 287);
+  --accent-tint-2: oklch(0.36 0.08 287);
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.4),
+            0 12px 34px -12px oklch(0 0 0 / 0.6);
+  --shadow-lift: 0 2px 6px oklch(0 0 0 / 0.45),
+                 0 28px 60px -18px oklch(0 0 0 / 0.7);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: oklch(0.18 0.012 286);
+    --bg-2: oklch(0.215 0.014 286);
+    --surface: oklch(0.235 0.014 286);
+    --ink: oklch(0.96 0.006 286);
+    --ink-2: oklch(0.78 0.012 286);
+    --muted: oklch(0.64 0.014 286);
+    --line: oklch(0.34 0.016 286);
+    --line-strong: oklch(0.44 0.02 286);
+    --accent: oklch(0.72 0.17 288);
+    --accent-ink: oklch(0.16 0.02 286);
+    --accent-tint: oklch(0.3 0.06 287);
+    --accent-tint-2: oklch(0.36 0.08 287);
+    --shadow: 0 1px 2px oklch(0 0 0 / 0.4),
+              0 12px 34px -12px oklch(0 0 0 / 0.6);
+    --shadow-lift: 0 2px 6px oklch(0 0 0 / 0.45),
+                   0 28px 60px -18px oklch(0 0 0 / 0.7);
+    color-scheme: dark;
+  }
+}

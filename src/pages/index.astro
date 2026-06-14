@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Certificates from "../components/Certificates.astro";
+import About from "../components/About.astro";
+import { certificates } from "../data/credentials";
+
+// Section numbers are computed from the real running order, so they never
+// drift when a section is added or hidden. Certificates only renders when
+// it has entries — when it's empty, About correctly becomes the next number.
+const showCerts = certificates.length > 0;
+const pad = (n: number) => String(n).padStart(2, "0");
+let n = 0;
+const projectsNum = pad((n += 1));
+const experienceNum = pad((n += 1));
+const educationNum = pad((n += 1));
+const certificatesNum = showCerts ? pad((n += 1)) : "";
+const aboutNum = pad((n += 1));
+---
+
+<BaseLayout>
+  <Hero />
+  <Projects num={projectsNum} />
+  <Experience num={experienceNum} />
+  <Education num={educationNum} />
+  <Certificates num={certificatesNum} />
+  <About num={aboutNum} />
+</BaseLayout>

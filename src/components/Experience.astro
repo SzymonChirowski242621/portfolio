@@ -1,0 +1,50 @@
+---
+import { experience, publications } from "../data/credentials";
+const { num = "02" } = Astro.props;
+---
+
+<section class="section shell" id="experience" aria-labelledby="exp-title">
+  <div class="section-head">
+    <span class="section-num">{num}</span>
+    <h2 class="section-title" id="exp-title">Experience</h2>
+    <p class="section-lead">
+      Where I've built and run ML in production — and the work that came out of it.
+    </p>
+  </div>
+
+  <div class="exp__grid">
+    <div class="timeline" data-reveal>
+      {experience.map((e) => (
+        <article class="tl-item">
+          <div class="tl-item__when">{e.when}</div>
+          <div class="tl-item__body">
+            <h3 class="tl-item__role">{e.role}</h3>
+            <p class="tl-item__org">{e.org}</p>
+            <p class="tl-item__desc">{e.desc}</p>
+            <ul class="tl-item__tags" aria-label="Tools">
+              {e.tags.map((t) => <li class="chip">{t}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <aside class="exp__aside" data-reveal>
+      <div class="pubs">
+        <h3 class="pubs__title">Publications</h3>
+        <p class="pubs__sub">Peer-reviewed & applied research</p>
+        {publications.map((p) => (
+          <a class="pub" href={p.link} target="_blank" rel="noopener">
+            <p class="pub__name">{p.title}</p>
+            <p class="pub__meta">
+              <span class="venue">{p.venue}</span>
+              <span>·</span>
+              <span>{p.date}</span>
+              <span aria-hidden="true">↗</span>
+            </p>
+          </a>
+        ))}
+      </div>
+    </aside>
+  </div>
+</section>

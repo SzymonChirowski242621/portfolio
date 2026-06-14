@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await project.render();
+---
+
+<BaseLayout
+  title={`${d.name} — ${d.client}`}
+  description={d.impact}
+  type="article"
+>
+  <article class="shell detail-hero">
+    <div class="detail-hero__back">
+      <a class="link-inline" href="/projects"><span aria-hidden="true">←</span> All projects</a>
+    </div>
+    <p class="pcard__client">{d.client} <span class="tag-pill" data-context={d.context}>{d.context}</span></p>
+    <h1 class="detail-hero__title">{d.name}</h1>
+    {d.status && <p class="detail-hero__status">{d.status}</p>}
+    <p class="hero__lead">{d.impact}</p>
+
+    <div class="detail-meta">
+      <div>
+        <p class="detail-meta__k">Client</p>
+        <p class="detail-meta__v">
+          {d.clientUrl
+            ? <a class="link-inline" href={d.clientUrl} target="_blank" rel="noopener">{d.client} <span class="arrow">↗</span></a>
+            : d.client}
+        </p>
+      </div>
+      <div>
+        <p class="detail-meta__k">Year</p>
+        <p class="detail-meta__v">{d.year}</p>
+      </div>
+      <div>
+        <p class="detail-meta__k">Domain</p>
+        <p class="detail-meta__v">{d.domain.join(", ")}</p>
+      </div>
+      <div>
+        <p class="detail-meta__k">Stack</p>
+        <p class="detail-meta__v">{d.stack.join(" · ")}</p>
+      </div>
+    </div>
+
+    <div class="detail-body">
+      <Content />
+      <div class="detail-links">
+        {d.presentation && (
+          <a class="btn btn--primary" href={d.presentation} target="_blank" rel="noopener">
+            View presentation <span class="arrow">↗</span>
+          </a>
+        )}
+        {d.repo && (
+          <a class="btn btn--ghost" href={d.repo} target="_blank" rel="noopener">
+            View code <span class="arrow">↗</span>
+          </a>
+        )}
+        {d.link && (
+          <a class="btn btn--ghost" href={d.link} target="_blank" rel="noopener">
+            Read more <span class="arrow">↗</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </article>
+</BaseLayout>

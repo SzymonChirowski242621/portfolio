@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectFilter from "../../components/islands/ProjectFilter.vue";
+import { getCollection } from "astro:content";
+
+const all = await getCollection("projects");
+const projects = all
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({ slug: p.slug, ...p.data }));
+
+// Filter by context category (Client / Academic / Publication / Personal), in a fixed order.
+const contextOrder = ["Client", "Academic", "Publication", "Personal"];
+const filters = contextOrder.filter((c) => projects.some((p) => p.context === c));
+---
+
+<BaseLayout
+  title="Projects"
+  description="A full index of machine-learning and MLOps projects by Szymon Chirowski — production systems, measurable impact and the engineering behind them."
+>
+  <section class="section shell">
+    <div class="section-head">
+      <span class="section-num">All work</span>
+      <h1 class="section-title">Projects</h1>
+      <p class="section-lead">
+        Every project, filterable by type — a mix of client, academic and research work,
+        each led by what it achieved and the engineering behind it.
+      </p>
+    </div>
+
+    <ProjectFilter client:load projects={projects} filters={filters} />
+  </section>
+</BaseLayout>

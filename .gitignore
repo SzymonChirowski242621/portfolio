@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+build/
+
+# astro generated cache
+.astro/
+
+# environment / secrets
+.env
+.env.production
+.env.*.local
+
+# cloudflare / wrangler (you're deploying here)
+.wrangler/
+.dev.vars
+
+# os / editor junk
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/
+.idea/

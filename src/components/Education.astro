@@ -1,0 +1,22 @@
+---
+import { education } from "../data/credentials";
+const { num = "03" } = Astro.props;
+---
+
+<section class="section shell" id="education" aria-labelledby="edu-title">
+  <div class="section-head">
+    <span class="section-num">{num}</span>
+    <h2 class="section-title" id="edu-title">Education</h2>
+  </div>
+
+  <div class="edu__grid" data-reveal>
+    {education.map((e) => (
+      <article class="edu-card">
+        <p class="edu-card__when">{e.when}</p>
+        <h3 class="edu-card__deg">{e.degree}</h3>
+        <p class="edu-card__inst">{e.institution}</p>
+        <p class="edu-card__focus">Focus — {e.focus}</p>
+      </article>
+    ))}
+  </div>
+</section>

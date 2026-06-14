@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+const all = await getCollection("projects");
+const { num = "01" } = Astro.props;
+const featured = all
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const total = all.length;
+---
+
+<section class="section shell" id="projects" aria-labelledby="projects-title">
+  <div class="section-head">
+    <span class="section-num">{num}</span>
+    <h2 class="section-title" id="projects-title">Selected&nbsp;work</h2>
+    <p class="section-lead">
+      A mix of client work, academic projects and research — each led by what it achieved
+      and the MLOps behind it: deployment, pipelines, monitoring and scale.
+    </p>
+  </div>
+
+  <div class="projects__list">
+    {featured.map((p, i) => <ProjectCard project={p} index={i + 1} />)}
+  </div>
+
+  <div class="projects__more">
+    <a class="btn btn--ghost" href="/projects">
+      View all {total} projects <span class="arrow">↗</span>
+    </a>
+  </div>
+</section>

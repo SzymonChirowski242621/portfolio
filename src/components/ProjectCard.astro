@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  project: CollectionEntry<"projects">;
+  index: number;
+}
+const { project, index } = Astro.props;
+const d = project.data;
+const num = String(index).padStart(2, "0");
+---
+
+<article class="pcard" data-reveal>
+  <span class="pcard__index">{num}</span>
+
+  <div class="pcard__left">
+    <p class="pcard__client">
+      {d.clientUrl
+        ? <a class="pcard__client-link" href={d.clientUrl} target="_blank" rel="noopener">{d.client} <span aria-hidden="true">↗</span></a>
+        : d.client}
+      <span class="tag-pill" data-context={d.context}>{d.context}</span>
+    </p>
+    <h3 class="pcard__name">{d.name}</h3>
+    {d.status && <p class="pcard__status">{d.status}</p>}
+    <p class="pcard__impact">{d.impact}</p>
+  </div>
+
+  <div class="pcard__right">
+    {d.mlops && (
+      <div class="pcard__mlops">
+        <span class="label">{d.mlopsLabel}</span>
+        <p>{d.mlops}</p>
+      </div>
+    )}
+    <ul class="stack" aria-label="Tech stack">
+      {d.stack.map((t) => <li class="chip">{t}</li>)}
+    </ul>
+    <div class="pcard__foot">
+      <a class="link-inline pcard__stretch" href={`/projects/${project.slug}`}>
+        Project details <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,31 @@
+---
+import ThemeToggle from "./islands/ThemeToggle.vue";
+import { site } from "../data/site";
+
+// On the homepage the section links are in-page anchors; elsewhere they point home.
+const home = "/";
+const nav = [
+  { label: "Projects", href: `${home}#projects` },
+  { label: "Experience", href: `${home}#experience` },
+  { label: "Education", href: `${home}#education` },
+  { label: "About", href: `${home}#about` },
+];
+---
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a href="/" class="brand" aria-label={`${site.name} — home`}>
+      <span class="brand__dot"></span>
+      {site.name}
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <div class="nav__links">
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      </div>
+      <a class="nav__cv" href={site.cv} download>
+        <span class="btn btn--ghost">CV ↓</span>
+      </a>
+      <ThemeToggle client:load />
+    </nav>
+  </div>
+</header>

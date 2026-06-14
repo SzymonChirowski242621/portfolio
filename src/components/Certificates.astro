@@ -1,0 +1,26 @@
+---
+import { certificates } from "../data/credentials";
+const { num = "04" } = Astro.props;
+---
+
+{certificates.length > 0 && (
+<section class="section section--tight shell" id="certificates" aria-labelledby="cert-title">
+  <div class="section-head">
+    <span class="section-num">{num}</span>
+    <h2 class="section-title" id="cert-title">Certifications</h2>
+    <p class="section-lead">High-signal cloud, ML and infrastructure credentials.</p>
+  </div>
+
+  <ul class="certs" data-reveal aria-label="Certifications">
+    {certificates.map((c) => (
+      <li class="cert">
+        <span class="cert__mark" aria-hidden="true">{c.mark}</span>
+        <span>
+          <span class="cert__name">{c.name}</span>
+          <span class="cert__issuer">{c.issuer}</span>
+        </span>
+      </li>
+    ))}
+  </ul>
+</section>
+)}
